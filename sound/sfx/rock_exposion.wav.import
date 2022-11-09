@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rock_exposion.wav-73b5a35f734de111ea4df71c4d198c4b.sample"
+
+[deps]
+
+source_file="res://sound/sfx/rock_exposion.wav"
+dest_files=[ "res://.import/rock_exposion.wav-73b5a35f734de111ea4df71c4d198c4b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

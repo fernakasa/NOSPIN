@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sound/music/level_music.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/Spawn.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 240, 100, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_random = 0.5
+color = Color( 1, 1, 1, 0.611765 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 240, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 427 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 390, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 577 )
+
+[node name="World" type="Node2D"]
+
+[node name="Spawn" parent="." instance=ExtResource( 4 )]
+ventana_min = 2
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Background"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 480, 0, 480, 854, 0, 854 )
+
+[node name="Particles2D" type="Particles2D" parent="Background"]
+position = Vector2( 240, -100 )
+amount = 500
+lifetime = 5.0
+preprocess = 500.0
+visibility_rect = Rect2( -240, -100, 480, 200 )
+process_material = SubResource( 1 )
+
+[node name="BordesNave" type="StaticBody2D" parent="Background"]
+collision_layer = 4
+
+[node name="TOP" type="CollisionShape2D" parent="Background/BordesNave"]
+position = Vector2( 240, -10 )
+shape = SubResource( 2 )
+
+[node name="BOT" type="CollisionShape2D" parent="Background/BordesNave"]
+position = Vector2( 240, 864 )
+shape = SubResource( 2 )
+
+[node name="LEFT" type="CollisionShape2D" parent="Background/BordesNave"]
+position = Vector2( -10, 427 )
+shape = SubResource( 3 )
+
+[node name="RIGHT" type="CollisionShape2D" parent="Background/BordesNave"]
+position = Vector2( 490, 427 )
+shape = SubResource( 3 )
+
+[node name="BordesRocks" type="StaticBody2D" parent="Background" groups=["bordes"]]
+collision_layer = 4
+collision_mask = 7
+
+[node name="TOP" type="CollisionShape2D" parent="Background/BordesRocks" groups=["bordes"]]
+position = Vector2( 240, -160 )
+shape = SubResource( 4 )
+
+[node name="BOT" type="CollisionShape2D" parent="Background/BordesRocks" groups=["bordes"]]
+position = Vector2( 240, 1014 )
+shape = SubResource( 4 )
+
+[node name="LEFT" type="CollisionShape2D" parent="Background/BordesRocks" groups=["bordes"]]
+position = Vector2( -160, 427 )
+shape = SubResource( 5 )
+
+[node name="RIGHT" type="CollisionShape2D" parent="Background/BordesRocks" groups=["bordes"]]
+position = Vector2( 640, 427 )
+shape = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+initLocation = Vector2( 240, 650 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+bus = "Music"

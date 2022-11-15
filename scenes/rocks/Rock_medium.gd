@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 export var initLocation = Vector2()
+export (int) var damage = 150
 export (float) var initVelocity = 80.0
 export (int) var vida = 60
 var rock_small = preload("res://scenes/rocks/Rock_small.tscn")
@@ -37,3 +38,6 @@ func _on_Rock_medium_body_entered(body):
 			$Sound_Explosion.playing = true
 			queue_free()
 		$Sound_Damage.playing = true
+
+	if body.is_in_group("player"):
+		body.setDamage(damage)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/playerShip2_red.png" type="Texture" id=2]
@@ -6,6 +6,21 @@
 [ext_resource path="res://sound/sfx/player_die.wav" type="AudioStream" id=4]
 [ext_resource path="res://sound/sfx/player_damage.wav" type="AudioStream" id=5]
 [ext_resource path="res://sound/sfx/player_collect.wav" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.101, 0.4, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.47451, 0.47451, 1 ), Color( 1, 0.47451, 0.47451, 1 ), Color( 0.8, 0.152941, 0.152941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.87451, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.47451, 0.47451, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 script = ExtResource( 1 )
@@ -15,6 +30,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 polygon = PoolVector2Array( -55, 6, -15, -15, -11, -20, -5, -37, 4, -37, 10, -20, 15, -15, 55, 5, 37, 35, 16, 29, 12, 37, -12, 37, -17, 29, -37, 34 )
 
@@ -40,3 +56,6 @@ stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 1.1
 bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 1 )

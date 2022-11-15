@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 export var initLocation = Vector2()
+export (int) var pts = 0
+export (int) var salud = 500
 export (int) var movespeed = 400
 export (int) var bullet_speed = 600
 export (float) var bullet_cadence = 0.2
@@ -34,7 +36,6 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("lbm") and !shooting:
 		fire()
 
-
 func fire():
 	shooting = true
 	var bullet_instance = bullet.instance()
@@ -46,3 +47,13 @@ func fire():
 	yield(get_tree().create_timer(bullet_cadence), "timeout")
 	shooting = false
 	
+func setDamage(damage):
+	$AnimationPlayer.play("damage")
+	salud -= damage
+	print('daño ', damage, '/', salud)
+	if (salud <= 0):
+		die()
+		
+func die():
+	print('Muerto ')
+	queue_free()

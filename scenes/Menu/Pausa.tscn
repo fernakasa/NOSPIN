@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/Menu/Pausa.gd" type="Script" id=3]
+[ext_resource path="res://assets/font/Alien-Encounters-Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 240, 427, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_random = 0.5
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 4 )
+
+[node name="Pausa" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.854902 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 240, 427 )
+amount = 400
+lifetime = 10.0
+preprocess = 400.0
+visibility_rect = Rect2( -240, -427, 480, 854 )
+process_material = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 158.5
+margin_top = 310.0
+margin_right = 321.5
+margin_bottom = 376.0
+custom_fonts/font = SubResource( 2 )
+text = "PAUSE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 131.0
+margin_top = 324.0
+margin_right = 356.0
+margin_bottom = 672.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+margin_top = 89.0
+margin_right = 225.0
+margin_bottom = 139.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color_focus = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_hover = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.188235, 0.188235, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Resume"
+icon_align = 1
+
+[node name="OptionBtn" type="Button" parent="VBoxContainer"]
+margin_top = 149.0
+margin_right = 225.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color_focus = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_hover = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.188235, 0.188235, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Options"
+icon_align = 1
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 209.0
+margin_right = 225.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color_focus = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_hover = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.188235, 0.188235, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "QUIT"
+icon_align = 1
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

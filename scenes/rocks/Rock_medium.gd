@@ -1,11 +1,13 @@
 extends RigidBody2D
 
 export var initLocation = Vector2()
-export (int) var damage = 150
+export (int) var damage = 125
 export (float) var initVelocity = 80.0
 export (int) var vida = 60
 var rock_small = preload("res://scenes/rocks/Rock_small.tscn")
 var rng = RandomNumberGenerator.new()
+
+onready var player = get_tree().get_root().get_node("World/Player")
 
 func _ready():
 	self.position = initLocation
@@ -24,8 +26,9 @@ func _on_Rock_medium_body_entered(body):
 	
 	if body.is_in_group("bullet"):
 		vida -= body.bullet_power
-		print("rock_medium: ", vida)
+		self.player.setScore(int(vida * body.bullet_power / 5))
 		if(vida <= 0):
+			self.player.setRecurses(5)
 			rng.randomize()
 			var change = rng.randi_range(0, 10)
 			if( change > 0.45 ):

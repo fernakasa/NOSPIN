@@ -7,6 +7,8 @@ export (int) var vida = 25
 
 var rng = RandomNumberGenerator.new()
 
+onready var player = get_tree().get_root().get_node("World/Player")
+
 func _ready():
 	self.position = initLocation
 	rng.randomize()
@@ -24,7 +26,9 @@ func _on_Rock_small_body_entered(body):
 	
 	if body.is_in_group("bullet"):
 		vida -= body.bullet_power
+		self.player.setScore(int(vida * body.bullet_power / 2))
 		if(vida <= 0):
+			self.player.setRecurses(3)
 			$Sound_Explosion.playing = true
 			queue_free()
 		$Sound_Damage.playing = true

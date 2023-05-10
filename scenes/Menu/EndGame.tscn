@@ -1,0 +1,166 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Logo.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/Menu/EndGame.gd" type="Script" id=3]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 240, 427, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_random = 0.5
+
+[node name="EndGame" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.854902 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 240, 427 )
+amount = 400
+lifetime = 10.0
+preprocess = 400.0
+visibility_rect = Rect2( -240, -427, 480, 854 )
+process_material = SubResource( 1 )
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 240, 250 )
+scale = Vector2( 0.791045, 0.791045 )
+texture = ExtResource( 1 )
+
+[node name="VBoxLabel" type="VBoxContainer" parent="."]
+margin_left = 80.0
+margin_top = 365.0
+margin_right = 400.0
+margin_bottom = 485.0
+rect_min_size = Vector2( 280, 120 )
+
+[node name="HBoxScore" type="HBoxContainer" parent="VBoxLabel"]
+margin_right = 320.0
+margin_bottom = 37.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VBoxLabel/HBoxScore"]
+margin_right = 158.0
+margin_bottom = 37.0
+size_flags_horizontal = 11
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "Score: "
+align = 2
+valign = 1
+
+[node name="Score" type="Label" parent="VBoxLabel/HBoxScore"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "1111"
+valign = 1
+
+[node name="HBoxRecursos" type="HBoxContainer" parent="VBoxLabel"]
+margin_top = 41.0
+margin_right = 320.0
+margin_bottom = 78.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RecursosLabel" type="Label" parent="VBoxLabel/HBoxRecursos"]
+margin_right = 158.0
+margin_bottom = 32.0
+size_flags_horizontal = 11
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Recursos: "
+align = 2
+valign = 1
+
+[node name="Recursos" type="Label" parent="VBoxLabel/HBoxRecursos"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "111111111"
+valign = 1
+
+[node name="HBoxTotal" type="HBoxContainer" parent="VBoxLabel"]
+margin_top = 82.0
+margin_right = 320.0
+margin_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="TotalLabel" type="Label" parent="VBoxLabel/HBoxTotal"]
+margin_top = 3.0
+margin_right = 158.0
+margin_bottom = 35.0
+size_flags_horizontal = 11
+custom_fonts/font = ExtResource( 2 )
+text = "Total: "
+align = 2
+valign = 1
+
+[node name="Total" type="Label" parent="VBoxLabel/HBoxTotal"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "1111111111"
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 131.0
+margin_top = 393.0
+margin_right = 356.0
+margin_bottom = 741.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 10
+alignment = 1
+
+[node name="PlayAgainBtn" type="Button" parent="VBoxContainer"]
+margin_top = 119.0
+margin_right = 225.0
+margin_bottom = 169.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color_focus = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_hover = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.188235, 0.188235, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Play Again"
+icon_align = 1
+
+[node name="ExitBtn" type="Button" parent="VBoxContainer"]
+margin_top = 179.0
+margin_right = 225.0
+margin_bottom = 229.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color_focus = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_hover = Color( 0.898039, 0.972549, 0.027451, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.188235, 0.188235, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "MENU"
+icon_align = 1
+
+[connection signal="pressed" from="VBoxContainer/PlayAgainBtn" to="." method="_on_PlayAgainBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]

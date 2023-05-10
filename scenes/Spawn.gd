@@ -1,8 +1,8 @@
 extends Node2D
 
-export (int) var rocas = 300
-export (int) var ventana_min = 3
-export (int) var ventana_max = 5
+export (int) var rocas = 100000
+export (float) var ventana_min = 0.8
+export (float) var ventana_max = 1.3
 
 var rock = preload("res://scenes/rocks/Rock.tscn")
 var rock_medium = preload("res://scenes/rocks/Rock_medium.tscn")
@@ -23,36 +23,30 @@ func _physics_process(_delta):
 func spawn(cant):
 	var iteraciones = int(cant / 2)
 	spawned += iteraciones
-	print('se crearan: ', iteraciones, " - van: ", spawned, "/", rocas, " rocas")
 	for n in iteraciones:
 		rng.randomize()
 		var xpos = int(rng.randi_range(30000, 459999) / 1000)
 		match (cant):
 			2:
-				print(cant, " - grande")
 				var new_rock = rock.instance()
 				new_rock.initLocation = Vector2(xpos, -50)
-				get_tree().get_root().add_child(new_rock)
+				get_parent().get_node("RockConteiner").add_child(new_rock)
 			3:
-				print(cant, " - mediana")
 				var new_rock = rock_medium.instance()
 				new_rock.initLocation = Vector2(xpos, -50)
-				get_tree().get_root().add_child(new_rock)
+				get_parent().get_node("RockConteiner").add_child(new_rock)
 			4:
-				print(cant, " - mediana")
 				var new_rock = rock_medium.instance()
 				new_rock.initLocation = Vector2(xpos, -50)
-				get_tree().get_root().add_child(new_rock)
+				get_parent().get_node("RockConteiner").add_child(new_rock)
 			5:
-				print(cant, " - chica")
 				var new_rock = rock_small.instance()
 				new_rock.initLocation = Vector2(xpos, -50)
-				get_tree().get_root().add_child(new_rock)
+				get_parent().get_node("RockConteiner").add_child(new_rock)
 			6:
-				print(cant, " - chica")
 				var new_rock = rock_small.instance()
 				new_rock.initLocation = Vector2(xpos, -50)
-				get_tree().get_root().add_child(new_rock)
+				get_parent().get_node("RockConteiner").add_child(new_rock)
 	
 func timer():
 		rng.randomize()

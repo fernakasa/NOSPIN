@@ -7,6 +7,8 @@ export (int) var vida = 100
 var rock_medium = preload("res://scenes/rocks/Rock_medium.tscn")
 var rng = RandomNumberGenerator.new()
 
+onready var player = get_tree().get_root().get_node("World/Player")
+
 func _ready():
 	self.position = initLocation
 	rng.randomize()
@@ -18,15 +20,18 @@ func _ready():
 	angular_velocity = new_angle
 	angular_damp = 0
 
+func destruir():
+	self.queue_free()
 
 func _on_Rock_body_entered(body):
 	if body.is_in_group("bordes"):
-		queue_free()
+		destruir()
 	
 	if body.is_in_group("bullet"):
 		vida -= body.bullet_power
-		print("rock: ", vida)
+		self.player.setScore(int(vida * body.bullet_power / 10))
 		if(vida <= 0):
+			self.player.setRecurses(10)
 			rng.randomize()
 			var change = rng.randi_range(0, 100)
 			if( change > 75 ):
@@ -45,4 +50,4 @@ func _on_Rock_body_entered(body):
 		$Sound_Damage.playing = true
 	
 	if body.is_in_group("player"):
-		body.setDamage(damage)
+		self.player.setDamage(damage)
